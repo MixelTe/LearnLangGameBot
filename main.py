@@ -25,10 +25,7 @@ def main():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    updates = list(map(lambda x: tgapi.Update(x), request.json))
-    for update in updates:
-        process_update(update)
-
+    process_update(tgapi.Update(request.json))
     return "ok"
 
 
