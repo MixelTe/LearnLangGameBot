@@ -1,0 +1,5 @@
+set webhook:
+https://api.telegram.org/bot<token>/setWebhook?secret_token=<stoken>&url=<url>
+
+delete webhook:
+https://api.telegram.org/bot<token>/deleteWebhook?drop_pending_updates=True
