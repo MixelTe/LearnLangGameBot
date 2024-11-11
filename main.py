@@ -33,7 +33,7 @@ def webhook():
 
 
 @app.route("/")
-def webhook():
+def index():
     return "Hello world!"
 
 
