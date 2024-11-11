@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Union
+from typing import Any, Union
 
 import requests
 
@@ -17,6 +17,10 @@ def setup():
     except Exception as e:
         logging.error(f"Cant read token\n{e}")
         raise e
+
+
+def check_webhook_token(token: str):
+    return token == token_webhook
 
 
 def call(method: str, json: object = None, timeout: int = None):

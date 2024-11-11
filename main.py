@@ -25,8 +25,16 @@ def main():
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
+    token = request.headers.get("X-Telegram-Bot-Api-Secret-Token", "")
+    if (not tgapi.check_webhook_token(token)):
+        return "wrong token"
     process_update(tgapi.Update(request.json))
     return "ok"
+
+
+@app.route("/")
+def webhook():
+    return "Hello world!"
 
 
 def updates_listener():
