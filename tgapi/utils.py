@@ -23,15 +23,20 @@ def check_webhook_token(token: str):
     return token == token_webhook
 
 
-def call(method: str, json: object = None, timeout: int = None):
+def call(method: str, json: Union["JsonObj", dict[str, Any]] = None, timeout: int = None):
     if timeout is not None and timeout <= 0:
         timeout = None
+    if isinstance(json, dict):
+        json = JsonDynamicObj(json)
+    json = json.to_json()
     r = requests.post(f"https://api.telegram.org/bot{token_bot}/{method}", json=json, timeout=timeout)
     try:
         if not r.ok:
-            logging.error(f"tgapi: {method} [{r.status_code}] {json}; {r.content}")
+            logging.error(f"tgapi: {method} [{r.status_code}]\t{json}; {r.content}")
             return False, r.json()
-        return True, r.json()
+        rj = r.json()
+        logging.info(f"tgapi: {method}\t{json} -> {rj}")
+        return True, rj
     except Exception as e:
         logging.error(f"tgapi call error\n{e}")
         raise Exception("tgapi call error")
@@ -68,3 +73,33 @@ class ParsedJson:
 
     def __str__(self) -> str:
         return self.__repr__()
+
+
+class JsonObj:
+    def to_json(self):
+        r = {}
+        for field in get_all_fields(self):
+            v = getattr(self, field)
+            v = JsonObj._item_to_json(v)
+            if v is not None:
+                r[field] = v
+        return r
+
+    def _item_to_json(v: Any):
+        if isinstance(v, JsonObj):
+            return v.to_json()
+        if isinstance(v, list):
+            return [JsonObj._item_to_json(vl) for vl in v if vl is not None]
+        return v
+
+    def __repr__(self) -> str:
+        return self.__class__.__name__ + "()"
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
+
+class JsonDynamicObj(JsonObj):
+    def __init__(self, json: dict[str, Any]) -> None:
+        for key in json:
+            setattr(self, key, json[key])
