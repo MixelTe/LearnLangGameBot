@@ -1,4 +1,6 @@
+from blueprints.register_blueprints import register_blueprints
 from bot import process_update
+from data import db_session
 from logger import set_logging
 from flask import Flask, request
 
@@ -11,16 +13,18 @@ app = Flask(__name__, static_folder=None)
 
 
 def main():
-    # if not os.path.exists("db"):
-    #     os.makedirs("db")
-    #     from scripts.init_values import init_values
-    #     init_values(True)
+    is_local_run = __name__ == "__main__"
 
-    # db_session.global_init()
+    db_session.global_init(file_db=is_local_run)
 
-    # register_blueprints(app)
-    if __name__ == "__main__":
-        updates_listener()
+    register_blueprints(app)
+
+    if is_local_run:
+        runInBotMode = True
+        if runInBotMode:
+            updates_listener()
+        else:
+            app.run(debug=True, port=3000)
 
 
 @app.route("/webhook", methods=["POST"])
@@ -38,6 +42,7 @@ def index():
 
 
 def updates_listener():
+    print("listening for updates...")
     update_id = -1
     while True:
         ok, updates = tgapi.getUpdates(update_id + 1, 60)
