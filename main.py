@@ -56,7 +56,7 @@ def frontend(path: str):
     if request.path.startswith("/static/"):
         res.headers.set("Cache-Control", f"public,max-age={60 * 60 * 24 * 14},immutable")
     else:
-        if not is_local_run:
+        if is_local_run:
             res.headers.set("Cache-Control", "no_cache")
         else:
             res.headers.set("Cache-Control", f"public,max-age={60 * 60}")
