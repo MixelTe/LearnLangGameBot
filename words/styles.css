@@ -1,0 +1,19 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Pt Sanc", Arial, Helvetica, sans-serif;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.header {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.page {
+    width: 100%;
+    max-width: 600px;
+    flex-grow: 1;
+}
