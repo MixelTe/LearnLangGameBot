@@ -1,3 +1,4 @@
+import logging
 import os
 from blueprints.register_blueprints import register_blueprints
 from bot import process_update
@@ -33,6 +34,7 @@ def webhook():
     token = request.headers.get("X-Telegram-Bot-Api-Secret-Token", "")
     if (not tgapi.check_webhook_token(token)):
         return "wrong token"
+    logging.info(f"webhook: {request.json}")
     process_update(tgapi.Update(request.json))
     return "ok"
 
