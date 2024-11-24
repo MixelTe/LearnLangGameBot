@@ -1,5 +1,5 @@
 from __future__ import annotations
-from sqlalchemy import DefaultClause, Column, Integer, String, Boolean
+from sqlalchemy import DefaultClause, Column, Integer, BigInteger, String, Boolean
 from sqlalchemy.orm import Session
 from sqlalchemy_serializer import SerializerMixin
 
@@ -14,7 +14,7 @@ class User(SqlAlchemyBase, SerializerMixin):
 
     id            = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     is_admin      = Column(Boolean, DefaultClause("0"), nullable=False)
-    id_tg         = Column(Integer, index=True, unique=True, nullable=False)
+    id_tg         = Column(BigInteger, index=True, unique=True, nullable=False)
     is_bot        = Column(Boolean, DefaultClause("0"), nullable=False)
     first_name    = Column(String(128), nullable=False)
     last_name     = Column(String(128), nullable=False)
