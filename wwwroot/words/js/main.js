@@ -1,7 +1,8 @@
-import { Div, getDiv, H1, SetContent } from "./littleLib.js";
+import { Div, getDiv, H1, initEl, SetContent } from "./littleLib.js";
 const pageEl = Div("page", [
-    Div([], JSON.stringify(TelegramGameProxy.initParams)),
+    initEl("pre", [], JSON.stringify(TelegramGameProxy.initParams, null, 4)),
     Div([], location.href),
+    initEl("pre", [], JSON.stringify(Telegram.WebApp, null, 4)),
 ]);
 console.log(TelegramGameProxy.initParams);
 SetContent(getDiv("root"), (() => {
