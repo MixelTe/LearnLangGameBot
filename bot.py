@@ -40,6 +40,6 @@ def onInlineQuery(query: tgapi.InlineQuery):
 
 def onCallbackQuery(callback_query: tgapi.CallbackQuery):
     if callback_query.game_short_name == "words":
-        tgapi.answerCallbackQuery(callback_query.id, url=f"https://example.com?uid={callback_query.sender.id}")
+        tgapi.answerCallbackQuery(callback_query.id, url=tgapi.get_url(f"words/?uid={callback_query.sender.id}"))
     else:
         tgapi.answerCallbackQuery(callback_query.id)

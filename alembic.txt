@@ -38,6 +38,7 @@ alembic revision --autogenerate -m "version name"
 
 ## upgrade
 alembic upgrade head
+python3.9 -m alembic.config upgrade head
 
 ## set version (for existing db without alembic)
 alembic stamp %version_id%
