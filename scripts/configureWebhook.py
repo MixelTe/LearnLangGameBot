@@ -7,7 +7,7 @@ def main(set = True):
         with open("token.txt") as f:
             token_bot = f.readline().strip()
             token_webhook = f.readline().strip()
-            url = f.readline().strip()
+            url = f.readline().strip() + "webhook"
     except Exception as e:
         print(f"Cant read token\n{e}")
         return
