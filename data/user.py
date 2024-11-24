@@ -25,7 +25,7 @@ class User(SqlAlchemyBase, SerializerMixin):
         return f"<User> [{self.id} {self.id_tg}] {self.username}"
 
     @staticmethod
-    def new(db_sess: Session, id_tg: int, is_bot: bool, first_name: str, last_name: str, username: str, language_code: str):
+    def new(db_sess: Session, id_tg: int, is_bot: bool, first_name: str, last_name: str, username: str, language_code: str, admin = False):
         user = User(id_tg=id_tg, is_bot=is_bot, first_name=first_name, last_name=last_name, username=username, language_code=language_code)
 
         db_sess.add(user)
@@ -47,10 +47,16 @@ class User(SqlAlchemyBase, SerializerMixin):
                 ("language_code", None, user.language_code),
             ]
         )
-        db_sess.add(log)
+        if admin:
+            user.is_admin = True
+        else:
+            db_sess.add(log)
         db_sess.commit()
 
         log.recordId = user.id
+        if admin:
+            db_sess.add(log)
+            log.userId = user.id
         db_sess.commit()
 
         return user

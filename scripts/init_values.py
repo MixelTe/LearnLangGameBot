@@ -33,8 +33,7 @@ def init_values(dev=False, cmd=False):
         db_session.global_init(dev)
         db_sess = db_session.create_session()
 
-        user_admin = User.new(db_sess, 5377785956, False, "Mixel", "", "MixelTe", "en")
-        user_admin.is_admin = True
+        user_admin = User.new(db_sess, 5377785956, False, "Mixel", "", "MixelTe", "en", admin=True)
         db_sess.commit()
 
         if dev:
