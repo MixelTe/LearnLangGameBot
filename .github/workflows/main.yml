@@ -22,5 +22,3 @@ jobs:
         rm wwwroot/words/.gitignore
     - name: Deploy with gh-pages
       uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: wwwroot
