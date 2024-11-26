@@ -12,7 +12,6 @@ from .db_session import SqlAlchemyBase
 class User(SqlAlchemyBase, SerializerMixin):
     __tablename__ = "User"
 
-    id            = Column(Integer, primary_key=True, unique=True, autoincrement=True)
     is_admin      = Column(Boolean, DefaultClause("0"), nullable=False)
     id_tg         = Column(BigInteger, index=True, unique=True, nullable=False)
     is_bot        = Column(Boolean, DefaultClause("0"), nullable=False)
@@ -23,6 +22,11 @@ class User(SqlAlchemyBase, SerializerMixin):
 
     def __repr__(self):
         return f"<User> [{self.id} {self.id_tg}] {self.username}"
+
+    def get_name(self):
+        if self.username != "":
+            return self.username
+        return f"${self.id_tg}"
 
     @staticmethod
     def new(db_sess: Session, id_tg: int, is_bot: bool, first_name: str, last_name: str, username: str, language_code: str, admin = False):
@@ -66,10 +70,6 @@ class User(SqlAlchemyBase, SerializerMixin):
         return User.new(db_sess, data.id, data.is_bot, data.first_name, data.last_name, data.username, data.language_code)
 
     @staticmethod
-    def get(db_sess: Session, id: int):
-        return db_sess.get(User, id)
-
-    @staticmethod
     def get_by_id_tg(db_sess: Session, id_tg: int):
         return db_sess.query(User).filter(User.id_tg == id_tg).first()
 
@@ -80,10 +80,6 @@ class User(SqlAlchemyBase, SerializerMixin):
     @staticmethod
     def get_admin(db_sess: Session):
         return db_sess.query(User).filter(User.is_admin == True).first()
-
-    @staticmethod
-    def all(db_sess: Session):
-        return db_sess.query(User).all()
 
     def get_dict(self):
         return {

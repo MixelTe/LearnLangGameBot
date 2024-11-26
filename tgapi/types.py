@@ -66,6 +66,19 @@ class CallbackQuery(ParsedJson):
             return "sender", User(v)
 
 
+class ChosenInlineResult(ParsedJson):
+    # https://core.telegram.org/bots/api#choseninlineresult
+    __id_field__ = "result_id"
+    result_id: str = ""
+    sender: User = None
+    # location: Location
+    inline_message_id: str = ""
+    query: str = ""
+
+    def _parse_field(self, key: str, v: Any):
+        if key == "from":
+            return "sender", User(v)
+
 class Update(ParsedJson):
     # https://core.telegram.org/bots/api#update
     __id_field__ = "update_id"
@@ -73,6 +86,7 @@ class Update(ParsedJson):
     message: Message = None
     inline_query: InlineQuery = None
     callback_query: CallbackQuery = None
+    chosen_inline_result: ChosenInlineResult = None
 
 
 class InputMessageContent(JsonObj):
