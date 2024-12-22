@@ -1,0 +1,61 @@
+.TSW {
+	display: grid;
+	grid-template-rows: 2fr 3fr;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.TSW_title {
+	font-size: 2rem;
+	align-self: center;
+	justify-self: center;
+	font-weight: bold;
+}
+
+.TSW_options {
+	display: flex;
+	border-radius: 1rem;
+	padding: 2px;
+	--_br: calc(1rem - 2px);
+}
+
+.TSW_options > * {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 2px;
+}
+
+.TSW_option {
+	flex-grow: 1;
+	flex-shrink: 0;
+	background-color: var(--c-back);
+	font-size: 1.5rem;
+	font-weight: bold;
+	box-shadow: inset 0 0 0 transparent;
+	transition: box-shadow, flex-grow;
+	transition-duration: 300ms;
+}
+.TSW_option:first-child {
+	border-top-left-radius: var(--_br);
+	border-top-right-radius: var(--_br);
+}
+.TSW_option:last-child {
+	border-bottom-left-radius: var(--_br);
+	border-bottom-right-radius: var(--_br);
+}
+.TSW_option:focus-visible {
+	box-shadow: inset 0 0 5px 1px black;
+}
+
+.TSW_correct {
+	box-shadow: inset 0 0 5px 1px lime;
+	flex-grow: 10;
+}
+.TSW_wrong {
+	box-shadow: inset 0 0 5px 1px gray;
+	flex-shrink: 1;
+}
+.TSW_wrong.TSW_selected {
+	box-shadow: inset 0 0 5px 1px tomato;
+	flex-grow: 4;
+}

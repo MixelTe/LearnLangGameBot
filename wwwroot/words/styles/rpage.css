@@ -1,0 +1,35 @@
+.RP {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.RP_page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	font-weight: bold;
+}
+
+.RP_title {
+	font-size: 2rem;
+}
+
+.RP_text {
+	font-size: 1.5rem;
+}
+
+.RP_again {
+	display: flex;
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding: 3px;
+	border-radius: 0.5rem;
+}
+.RP_again > span {
+	display: block;
+	flex-grow: 1;
+	background-color: var(--c-back);
+	border-radius: calc(0.5rem - 3px);
+	padding: 0.2em 0.6em;
+}

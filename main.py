@@ -22,7 +22,7 @@ def main():
     register_blueprints(app)
 
     if is_local_run:
-        runInBotMode = True
+        runInBotMode = False
         if runInBotMode:
             updates_listener()
         else:
