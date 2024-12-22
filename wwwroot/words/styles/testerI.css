@@ -1,0 +1,139 @@
+.TIW {
+	display: grid;
+	grid-template-rows: 4fr 6fr;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.TIW_title {
+	font-size: 2rem;
+	align-self: center;
+	justify-self: center;
+	font-weight: bold;
+	display: grid;
+	grid-template-rows: 1fr 0fr;
+	justify-items: center;
+	transition: grid-template-rows 300ms;
+	word-break: break-all;
+}
+.TIW_selected .TIW_title {
+	grid-template-rows: 1fr 1fr;
+}
+.TIW_title > :last-child {
+	overflow: hidden;
+}
+
+.TIW_inputsContainer {
+	display: flex;
+	width: 100%;
+}
+.TIW_inputsContainer > div:first-child {
+	flex-grow: 1;
+}
+.TIW_inputsContainer > div:last-child {
+	flex-grow: 1;
+}
+
+.TIW_inputs {
+	flex-basis: 0;
+	min-width: fit-content;
+	max-width: 80%;
+	flex-grow: 100;
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1.5rem;
+	height: fit-content;
+	padding: 3px;
+	border-radius: 4px;
+	transition: grid-template-columns 300ms, flex-grow 300ms 100ms;
+}
+.TIW_input {
+	grid-column: 1;
+	grid-row: 1;
+	padding: 0em 0.2em;
+	min-width: 1em;
+	width: 100%;
+	border-radius: 2px;
+	border: none;
+	background-color: var(--c-back);
+	color: #128d5b;
+	font-size: 1.2rem;
+	outline: none;
+	transition: width 300ms 100ms;
+}
+.TIW_answerBtn {
+	background-color: transparent;
+	width: 100%;
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bold;
+	overflow: hidden;
+}
+.TIW_inputShadow {
+	grid-column: 1;
+	grid-row: 1;
+	width: 100%;
+	max-height: 40vh;
+	padding: 0em 0.2em;
+	font-size: 1.2rem;
+	background-color: var(--c-back);
+	opacity: 0;
+	user-select: none;
+	pointer-events: none;
+	transition: opacity 100ms, font-size 300ms 100ms;
+}
+.TIW_error {
+
+}
+.TIW_error__ch_c {
+	color: #1a9149;
+}
+.TIW_error__ch_a {
+	color: blue;
+}
+.TIW_error__ch_e {
+	color: tomato;
+}
+.TIW_error__ch_w {
+	position: relative;
+}
+.TIW_error__ch_w::before {
+	content: "";
+    position: absolute;
+    left: 40%;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 2px;
+    background-color: tomato;
+    transform: rotate(15deg);
+}
+.TIW_error__ch_w > :first-child {
+	color: tomato;
+}
+.TIW_error__ch_w > :last-child {
+	position: absolute;
+	top: -50%;
+	right: -20%;
+	color: blue;
+}
+
+.TIW_selected .TIW_inputsContainer {
+	grid-template-columns: 1fr 0;
+}
+.TIW_selected .TIW_inputs {
+	grid-template-columns: 1fr 0;
+	flex-grow: 0;
+}
+.TIW_selected .TIW_inputShadow {
+	display: flex;
+	opacity: 1;
+	font-size: 1.5rem;
+}
+.TIW_selected .TIW_inputShadow > div {
+	background-color: var(--c-back);
+	transition-property: background-color;
+	transition-duration: 300ms;
+}
+.TIW_selected .TIW_input {
+	width: 0;
+	min-width: 0;
+}

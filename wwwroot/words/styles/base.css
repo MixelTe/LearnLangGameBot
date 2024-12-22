@@ -1,0 +1,104 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Pt Sanc", Arial, Helvetica, sans-serif;
+    gap: 1rem;
+}
+button {
+    padding: 0;
+	cursor: pointer;
+	outline: none;
+    border: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+@property --gp1 {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: -10%;
+}
+@property --gp2 {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: -40%;
+}
+@property --gp3 {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: -40%;
+}
+.gradientBack, .gradientText {
+    --gp1: -10%;
+    --gp2: -40%;
+    --gp3: -40%;
+    background-image:
+        radial-gradient(circle at center, transparent calc(var(--gp3) - 20%), blue var(--gp3), blue calc(var(--gp3) + 5%), transparent calc(var(--gp3) + 40%)),
+        radial-gradient(circle at center, transparent calc(var(--gp2) - 20%), tomato var(--gp2), tomato calc(var(--gp2) + 5%), transparent calc(var(--gp2) + 40%)),
+        linear-gradient(0deg, transparent calc(var(--gp1) - 10%), lime var(--gp1), transparent calc(var(--gp1) + 10%)),
+        linear-gradient(70deg, #008384, #3aa300);
+    background-size: 100vw 100vh;
+    background-size: 100dvw 100dvh;
+    background-position: var(--bx, 0) var(--by, 0);
+    transition: --gp1, --gp2, --gp3;
+    transition-timing-function: cubic-bezier(0, 0.9, 0.68, 1.05);
+    transition-duration: 0s;
+}
+.gradientText {
+    color: transparent;
+    background-clip: text;
+}
+.gradient_good .gradientBack, .gradient_good .gradientText {
+    --gp1: 110%;
+    transition-duration: 1s;
+}
+.gradient_bad .gradientBack, .gradient_bad .gradientText {
+    --gp2: 110%;
+    transition-duration: 1.2s;
+}
+.gradient_loading .gradientBack, .gradient_loading .gradientText {
+    --gp3: 110%;
+    transition-duration: 1.2s;
+}
+
+.header {
+    font-size: 1.8rem;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+.page-container {
+    display: grid;
+    width: 100%;
+    max-width: 600px;
+    min-height: 0;
+    flex-grow: 1;
+}
+.page {
+    grid-row: 1;
+    grid-column: 1;
+    opacity: 1;
+    transition: opacity 300ms;
+    min-height: 0;
+}
+.page_hidden {
+    opacity: 0;
+}
+.page_fading {
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+.overBtn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    animation: overBtn 1s infinite;
+}
+.overBtn_hidden {
+    left: 100%;
+}

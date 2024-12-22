@@ -15,12 +15,14 @@
         body,
         #root,
         #loader {
-            height: 100%;
+            height: 100vh;
             height: 100dvh;
+            overflow: hidden;
         }
 
         body {
-            background-color: #bbfae5;
+            --c-back: #bbfae5;
+            background-color: var(--c-back);
             margin: 0;
         }
 
@@ -126,11 +128,14 @@
             }
         }
     </style>
-    <script defer src="./telegram-web-app.js"></script>
+    <script src="./telegram-web-app.js"></script>
     <script defer src="./tg_games.js"></script>
     <script type="module" src="./js/main.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT Sans">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/testerI.css">
+    <link rel="stylesheet" href="./styles/testerS.css">
+    <link rel="stylesheet" href="./styles/rpage.css">
 </head>
 
 <body>
@@ -138,6 +143,9 @@
     <div id="loader">
         <div class="loader"></div>
     </div>
+    <script>
+        try { Telegram.WebApp.ready(); } catch {}
+    </script>
 </body>
 
 </html>
