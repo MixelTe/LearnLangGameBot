@@ -1,6 +1,6 @@
 import type { WordInput } from "./api.js";
-import { feedbackBad, feedbackGood, toCapitalCase } from "./functions.js";
-import { Button, Div, Input, Span } from "./littleLib.js";
+import { feedbackBad, feedbackGood } from "./functions.js";
+import { Button, Div, Input, Span, toCapitalCase } from "./littleLib.js";
 import { Page } from "./page.js";
 import { string_correction_by_smith_waterman_algorithm, string_similarity_by_smith_waterman_algorithm } from "./smith_waterman_algorithm.js";
 

@@ -63,6 +63,7 @@ export function string_similarity_by_smith_waterman_algorithm(A: string, B: stri
 		lj = j;
 	}
 
+	// console.log((m + n / 2) / Math.max(A.length, B.length));
 	return (m + n / 2) / Math.max(A.length, B.length);
 }
 

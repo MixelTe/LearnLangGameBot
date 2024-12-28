@@ -81,9 +81,9 @@
 	pointer-events: none;
 	transition: opacity 100ms, font-size 300ms 100ms;
 }
-.TIW_error {
+/* .TIW_error {
 
-}
+} */
 .TIW_error__ch_c {
 	color: #1a9149;
 }

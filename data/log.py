@@ -60,3 +60,6 @@ class Actions:
 class Tables:
     User = "User"
     GameMessage = "GameMessage"
+    Theme = "Theme"
+    Word = "Word"
+    UserWord = "UserWord"
