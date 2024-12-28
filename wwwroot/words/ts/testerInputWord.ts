@@ -20,7 +20,7 @@ export class testerInputWord extends Page
 	{
 		this.root = Div(["page", "TIW"], [
 			Div(["TIW_title", "gradientText"], [
-				Div([], this.wordInput.question),
+				Div([], toCapitalCase(this.wordInput.question)),
 				Div([], toCapitalCase(this.wordInput.answers[0])),
 			]),
 			Div("TIW_inputsContainer", [
@@ -63,12 +63,12 @@ export class testerInputWord extends Page
 	private genInputErrorFeedback(input: string)
 	{
 		if (input.length == 0) return Span();
-		const correct = this.wordInput.answers.slice()
+		const correct = this.wordInput.answers
 			.map(v => ({ ans: v, sim: string_similarity_by_smith_waterman_algorithm(v, input) }))
 			.sort((a, b) => b.sim - a.sim)
-		[0].ans;
-		const sc = string_correction_by_smith_waterman_algorithm(correct, input);
-		console.log(sc);
+		[0];
+		if (correct.sim < 0.5) return Span("TIW_error__ch_e", toCapitalCase(input));
+		const sc = string_correction_by_smith_waterman_algorithm(correct.ans, input);
 		if (sc.length >= 1)
 		{
 			sc[0].val = sc[0].val.toUpperCase();

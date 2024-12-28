@@ -37,7 +37,7 @@ export async function getData(): Promise<TesterData>
 				type: "WordInput",
 				id: 10,
 				question: "Яблоко",
-				answers: ["the apple (object)", "the apple", "apple"],
+				answers: ["the apple (noun)", "the apple", "apple"],
 			},
 			{
 				type: "WordSelect",

@@ -52,7 +52,7 @@
 	flex-grow: 10;
 }
 .TSW_wrong {
-	box-shadow: inset 0 0 5px 1px gray;
+	/* box-shadow: inset 0 0 5px 1px gray; */
 	flex-shrink: 1;
 }
 .TSW_wrong.TSW_selected {
