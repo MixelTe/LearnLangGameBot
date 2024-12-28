@@ -21,11 +21,3 @@ export function feedbackLoadingStart() {
 export function feedbackLoadingEnd() {
     feedbackLoadingRun = false;
 }
-export async function wait(t) {
-    return new Promise(r => setTimeout(r, t));
-}
-export function toCapitalCase(str) {
-    if (str.length == 0)
-        return "";
-    return str[0].toUpperCase() + str.slice(1);
-}

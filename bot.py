@@ -47,7 +47,7 @@ def onInlineQuery(query: tgapi.InlineQuery):
             ], cache_time=1)
     else:
         tgapi.answerInlineQuery(query.id, [
-            tgapi.InlineQueryResultArticle("hint_" + v[0], v[1], tgapi.InputTextMessageContent("400")
+            tgapi.InlineQueryResultArticle("hint_" + v[0], f"[{v[0]}] {v[1]}", tgapi.InputTextMessageContent("400")
                                            ) for v in word_games
             ], cache_time=1)
 
@@ -59,7 +59,7 @@ def onCallbackQuery(callback_query: tgapi.CallbackQuery, db_sess: Session):
         txt = "Эта кнопка не работает!" if callback_query.sender.language_code == "ru" else "This button don't work!"
         tgapi.answerCallbackQuery(callback_query.id, txt)
         return
-    url = f"words/?uid={callback_query.sender.id}&id={msg.result_id}"
+    url = f"words/?uid={callback_query.sender.id}&tid={msg.result_id}"
     tgapi.answerCallbackQuery(callback_query.id, url=tgapi.get_url(url))
 
 

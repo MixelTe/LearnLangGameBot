@@ -55,6 +55,7 @@ export function string_similarity_by_smith_waterman_algorithm(A, B, Match = 3, D
         li = i;
         lj = j;
     }
+    // console.log((m + n / 2) / Math.max(A.length, B.length));
     return (m + n / 2) / Math.max(A.length, B.length);
 }
 export function string_correction_by_smith_waterman_algorithm(correctString, inputString, fillWord = true, Match = 3, Dismatch = 3, Gap = 1) {

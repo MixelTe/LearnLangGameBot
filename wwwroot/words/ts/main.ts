@@ -1,4 +1,5 @@
 import { getData, saveResult, type TestResult } from "./api.js";
+import { ErrorPage } from "./errorPage.js";
 import { feedbackLoadingEnd, feedbackLoadingStart } from "./functions.js";
 import { Div, getDiv, H1, SetContent } from "./littleLib.js";
 import type { Page } from "./page.js";
@@ -26,6 +27,13 @@ async function start(firstStart = false)
     {
         loader.classList.add("loader_hidden");
         setTimeout(() => document.body.removeChild(loader), 350);
+    }
+
+    if (data.loadError)
+    {
+        await runPage(new ErrorPage(data.loadError));
+        start();
+        return;
     }
 
     // await runPage(new ResultPage([{ "id": 1, "result": false }, { "id": 2, "result": false }, { "id": 3, "result": true }]));

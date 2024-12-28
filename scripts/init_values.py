@@ -8,8 +8,6 @@ def init_values(dev=False, cmd=False):
             os.makedirs("db")
         if cmd:
             add_parent_to_path()
-    else:
-        add_parent_to_path()
 
     from data import db_session
     from data.get_datetime_now import get_datetime_now
