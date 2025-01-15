@@ -1,4 +1,4 @@
-import { getData, saveResult, type TestResult } from "./api.js";
+import { getData, saveResult, setOnGetScore, type TestResult } from "./api.js";
 import { ErrorPage } from "./errorPage.js";
 import { feedbackLoadingEnd, feedbackLoadingStart } from "./functions.js";
 import { Div, getDiv, H1, SetContent } from "./littleLib.js";
@@ -56,8 +56,10 @@ async function start(firstStart = false)
         });
     }
 
+    const p = new ResultPage(results)
+    setOnGetScore(p.onGetScore.bind(p));
     saveResult(results);
-    await runPage(new ResultPage(results));
+    await runPage(p);
     start();
 }
 

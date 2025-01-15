@@ -61,10 +61,15 @@ async function getData_test() {
         ]
     };
 }
+let onGetScore = () => { };
 export async function saveResult(results) {
     console.log(results);
-    await fetchJsonPost("/api/save_result", {
+    const r = await fetchJsonPost("/api/save_result", {
         uid: UID,
         results,
     });
+    onGetScore(r.score);
+}
+export function setOnGetScore(fn) {
+    onGetScore = fn;
 }

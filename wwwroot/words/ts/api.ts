@@ -97,11 +97,18 @@ async function getData_test(): Promise<TesterData>
 	}
 }
 
+let onGetScore: (score: number) => void = () => { };
 export async function saveResult(results: TestResult[])
 {
 	console.log(results);
-	await fetchJsonPost("/api/save_result", {
+	const r = await fetchJsonPost<{ score: number }>("/api/save_result", {
 		uid: UID,
 		results,
 	});
+	onGetScore(r.score);
+}
+
+export function setOnGetScore(fn: (score: number) => void)
+{
+	onGetScore = fn;
 }

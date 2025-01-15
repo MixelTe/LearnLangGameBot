@@ -2,6 +2,7 @@ import { Button, Div, Span } from "./littleLib.js";
 import { Page } from "./page.js";
 export class ResultPage extends Page {
     results;
+    scoreEl = Div(["RP_text", "gradientText"]);
     constructor(results) {
         super();
         this.results = results;
@@ -14,8 +15,12 @@ export class ResultPage extends Page {
             Div(["RP_title", "gradientText"], "Итого!"),
             Div(["RP_text", "gradientText"], `Правильных ответов:`),
             Div(["RP_text", "gradientText"], `${countRight} из ${countAll} - ${percent}%`),
+            this.scoreEl,
             Button(["RP_again", "gradientBack"], Span([], Span("gradientText", "Ещё раз!")), () => this.return(true)),
             this.overBtn,
         ]));
+    }
+    onGetScore(score) {
+        this.scoreEl.innerText = `Score: ${score}`;
     }
 }
